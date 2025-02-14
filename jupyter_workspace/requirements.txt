@@ -1,0 +1,8 @@
+jupyter==1.0.0
+notebook>=7.0.0
+ipykernel>=6.0.0
+pandas>=2.0.0
+numpy>=1.24.0
+pyspark>=3.5.0
+findspark>=2.0.1
+sparkmagic>=0.22.0
