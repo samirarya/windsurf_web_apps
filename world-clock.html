@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Clock</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="nav-left">
+                <a href="index.html" class="nav-logo"><i class="fas fa-home"></i></a>
+                <div class="dropdown">
+                    <button class="dropbtn">Applications</button>
+                    <div class="dropdown-content">
+                        <a href="typing-test.html">Typing Speed</a>
+                        <a href="todo.html">To-Do List</a>
+                        <a href="world-clock.html">World Clock</a>
+                        <a href="stock-tracker.html">Stock Tracker</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>World Clock</h1>
+        <div class="world-clock">
+            <div class="search-box">
+                <input type="text" id="city-search" placeholder="Search for a city..." class="city-search">
+                <button id="add-city" class="add-city-btn"><i class="fas fa-plus"></i></button>
+            </div>
+            <div class="clock-grid" id="clock-grid">
+                <!-- Clock cards will be added here dynamically -->
+            </div>
+        </div>
+    </div>
+    <script src="world-clock.js"></script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Market Tracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="nav-left">
+                <a href="index.html" class="nav-logo"><i class="fas fa-home"></i></a>
+                <div class="dropdown">
+                    <button class="dropbtn">Applications</button>
+                    <div class="dropdown-content">
+                        <a href="typing-test.html">Typing Speed</a>
+                        <a href="todo.html">To-Do List</a>
+                        <a href="world-clock.html">World Clock</a>
+                        <a href="stock-tracker.html">Stock Tracker</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Stock Market Tracker</h1>
+        <div class="stock-tracker">
+            <div class="search-box">
+                <input type="text" id="stock-search" placeholder="Enter stock symbol (e.g., AAPL)" class="stock-search">
+                <button id="add-stock" class="add-stock-btn">Track Stock</button>
+            </div>
+
+            <div class="stock-grid" id="stock-grid">
+                <!-- Stock cards will be added here dynamically -->
+            </div>
+
+            <div class="stock-detail" id="stock-detail">
+                <div class="detail-header">
+                    <h2 id="detail-symbol">Stock Details</h2>
+                    <button id="close-detail" class="close-detail-btn"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="detail-content">
+                    <div class="chart-container">
+                        <canvas id="price-chart"></canvas>
+                    </div>
+                    <div class="stock-info">
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-label">Open</span>
+                                <span id="detail-open" class="info-value">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">High</span>
+                                <span id="detail-high" class="info-value">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Low</span>
+                                <span id="detail-low" class="info-value">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Volume</span>
+                                <span id="detail-volume" class="info-value">-</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="news-container">
+                        <h3>Latest News</h3>
+                        <div id="news-list" class="news-list">
+                            <!-- News items will be added here dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="stock-tracker.js"></script>
+</body>
+</html>

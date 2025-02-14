@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Speed</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="nav-left">
+                <a href="index.html" class="nav-logo"><i class="fas fa-home"></i></a>
+                <div class="dropdown">
+                    <button class="dropbtn">Applications</button>
+                    <div class="dropdown-content">
+                        <a href="typing-test.html">Typing Speed</a>
+                        <a href="todo.html">To-Do List</a>
+                        <a href="world-clock.html">World Clock</a>
+                        <a href="stock-tracker.html">Stock Tracker</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Typing Speed</h1>
+        <div id="timer">Time: 60s</div>
+        <div id="text-display" class="text-display"></div>
+        <div id="feedback-message" class="feedback-message"></div>
+        <textarea id="input-field" class="input-field" placeholder="Start typing when ready..." disabled></textarea>
+        <div class="stats">
+            <div id="wpm">WPM: 0</div>
+            <div id="accuracy">Accuracy: 100%</div>
+        </div>
+        <button id="start-btn" class="start-btn">Start Test</button>
+        <button id="reset-btn" class="reset-btn" disabled>Reset</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
