@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Analytics Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <div class="max-w-3xl mx-auto">
+            <h1 class="text-3xl font-bold text-center mb-8 text-gray-800">File Analytics Dashboard</h1>
+            
+            <!-- Upload Section -->
+            <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="files">
+                        Select Files to Upload
+                    </label>
+                    <input type="file" 
+                           id="files" 
+                           multiple 
+                           class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+                           accept=".csv">
+                </div>
+                <button onclick="uploadFiles()" 
+                        class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                    Upload and Analyze
+                </button>
+            </div>
+
+            <!-- Loading Indicator -->
+            <div id="loading" class="hidden">
+                <div class="flex justify-center items-center">
+                    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+                    <span class="ml-2 text-gray-600">Processing files...</span>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div id="results" class="hidden bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-bold mb-4 text-gray-800">Analysis Results</h2>
+                <div id="analytics-results"></div>
+            </div>
+
+            <!-- Error Display -->
+            <div id="error" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-4">
+                <span id="error-message"></span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function uploadFiles() {
+            const fileInput = document.getElementById('files');
+            const files = fileInput.files;
+            
+            if (files.length === 0) {
+                showError('Please select at least one file');
+                return;
+            }
+
+            const formData = new FormData();
+            for (let i = 0; i < files.length; i++) {
+                formData.append('files[]', files[i]);
+            }
+
+            // Show loading indicator
+            document.getElementById('loading').classList.remove('hidden');
+            document.getElementById('results').classList.add('hidden');
+            document.getElementById('error').classList.add('hidden');
+
+            try {
+                const response = await fetch('/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+                
+                if (!response.ok) {
+                    throw new Error(data.error || 'Upload failed');
+                }
+
+                displayResults(data);
+            } catch (error) {
+                showError(error.message);
+            } finally {
+                document.getElementById('loading').classList.add('hidden');
+            }
+        }
+
+        function displayResults(data) {
+            const resultsDiv = document.getElementById('results');
+            const analyticsDiv = document.getElementById('analytics-results');
+            
+            let html = `
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="p-4 bg-gray-50 rounded">
+                        <p class="font-semibold">Total Rows:</p>
+                        <p>${data.total_rows}</p>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded">
+                        <p class="font-semibold">Total Columns:</p>
+                        <p>${data.total_columns}</p>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <p class="font-semibold">Columns:</p>
+                    <p class="text-sm">${data.columns.join(', ')}</p>
+                </div>
+            `;
+
+            analyticsDiv.innerHTML = html;
+            resultsDiv.classList.remove('hidden');
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('error');
+            const errorMessage = document.getElementById('error-message');
+            errorMessage.textContent = message;
+            errorDiv.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
