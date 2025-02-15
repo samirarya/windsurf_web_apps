@@ -1,0 +1,5 @@
+fan_ivr_spark_olc/
+.env
+rag_fastapi_project/.env
+__pycache__/
+*.pyc
